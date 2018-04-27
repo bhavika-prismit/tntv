@@ -218,7 +218,9 @@ get_header(); ?>
                         $url = get_the_post_thumbnail_url(get_the_ID(), "recent_activity");
                         if ($url == "") {
                             $url = get_template_directory_uri() . '/assets/img/logo.png';
-                        }?>
+                        }
+
+                        ?>
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="frame">
                                 <a href="<?php echo get_post_permalink(); ?>">
@@ -371,7 +373,7 @@ get_header(); ?>
                                         } ?></p>
                                     <div class="for-border">
                                         <a class="slide-readmore"
-                                           href="<?php echo isset($post[$i]->guid) ? $post[$i]->guid : ''; ?>">Read
+                                           href="<?php echo get_post_permalink($post[$i]->ID); ?>">Read
                                             More</a>
                                     </div>
                                 </div>

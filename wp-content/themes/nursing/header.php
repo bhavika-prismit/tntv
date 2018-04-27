@@ -1,11 +1,11 @@
 <!doctype html>
 <?php $content = get_option('general_settings');
-global $wp;?>
+global $wp; ?>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php  wp_title('', true);?></title>
+    <title><?php wp_title('', true); ?></title>
     <link rel="icon" href="<?php echo isset($content['favicon']) ? wp_get_attachment_url($content['favicon']) : ""; ?>"
           type="image/png" sizes="16x16">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,600,700"
@@ -21,23 +21,28 @@ global $wp;?>
                 <div class="social-icons">
                     <ul>
                         <li class="facebook"><a
-                                    href="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(home_url($wp->request)); ?>" target="_blank"><span><i
+                                    href="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(home_url($wp->request)); ?>"
+                                    target="_blank"><span><i
                                             class="fab fa-facebook-f"></i></span></a></li>
                         <li class="twitter"><a
-                                    href="http://twitter.com/intent/tweet/?text=&amp;url=<?php echo home_url($wp->request); ?>" target="_blank"><span><i
+                                    href="http://twitter.com/intent/tweet/?text=&amp;url=<?php echo home_url($wp->request); ?>"
+                                    target="_blank"><span><i
                                             class="fab fa-twitter"></i></span></a></li>
-<!--                        <li class="linkedin"><a-->
-<!--                                    href="--><?php //echo home_url($wp->request); ?><!--"><span><i-->
-<!--                                            class="fab fa-linkedin-in"></i></span></a></li>-->
+                        <!--                        <li class="linkedin"><a-->
+                        <!--                                    href="-->
+                        <?php //echo home_url($wp->request); ?><!--"><span><i-->
+                        <!--                                            class="fab fa-linkedin-in"></i></span></a></li>-->
                         <li class="pinterest"><a
-                                    href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode(home_url($wp->request)); ?>" target="_blank"><span><i
+                                    href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode(home_url($wp->request)); ?>"
+                                    target="_blank"><span><i
                                             class="fab fa-pinterest-p"></i></span></a></li>
                     </ul>
                 </div>
                 <div class="search-box">
-                    <input type="search" id="keyword-search" placeholder="Type your keywords">
-                    <span class="search-icon"><i class="fas fa-search"></i></span>
-                    <?php get_search_form(); ?>
+                    <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+                        <input type="search" id="keyword-search" name="s" placeholder="Type your keywords">
+                        <span class="search-icon"><i class="fas fa-search"></i></span>
+                    </form>
                 </div>
             </div>
         </div>

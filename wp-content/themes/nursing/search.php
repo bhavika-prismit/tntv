@@ -6,48 +6,47 @@
  * Time: 5:32 PM
  */
 get_header();
-?>
-
-<section id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-
-        <?php if (have_posts()) : ?>
-
-            <header class="page-header">
-                <h1 class="page-title"><?php printf(__('Search Results for: %s', 'nursing'), get_search_query()); ?></h1>
-            </header><!-- .page-header -->
-
-            <?php
-            // Start the loop.
-            while (have_posts()) : the_post(); ?>
-
-                <?php
-                echo "hekklo";
-                /*
-                 * Run the loop for the search to output the results.
-                 * If you want to overload this in a child theme then include a file
-                 * called content-search.php and that will be used instead.
-                 */
-                get_template_part('content', 'search');
-
-                // End the loop.
-            endwhile;
-
-//            // Previous/next page navigation.
-//            the_posts_pagination( array(
-//                'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-//                'next_text'          => __( 'Next page', 'twentyfifteen' ),
-//                'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-//            ) );
-
-        // If no content, include the "No posts found" template.
-        else :
-            get_template_part('content', 'none');
-
-        endif;
-        ?>
-
-    </main><!-- .site-main -->
-</section><!-- .content-area -->
-
-<?php get_footer(); ?>
+$url = get_template_directory_uri() . '/assets/img/slider-01.jpg';?>
+    <div class="banner-section">
+        <div class="banner-area" style="background-image:url(<?php echo $url; ?>)">
+            <div class="banner-text-area">
+                <h2><?php printf(__('Search Results for: %s', 'nursing'), get_search_query()); ?></h2>
+                <span class="border-left"></span><span class="border-right"></span>
+            </div>
+        </div>
+        <span class="left-white-area"></span><span class="right-white-area"></span>
+    </div>
+<?php if (have_posts()) { while (have_posts()) : the_post();
+    $nameplate = get_field('name_plate');
+    ?>
+    <div class="content-area">
+        <section class="inner-pages">
+            <div class="container">
+                <div class="row"><h2><?php the_title();?></h2></div>
+                <div class="row">
+                    <?php //$thumbnail = get_the_post_thumbnail();
+                    $thumbnail = get_post_thumbnail_id();
+                    if ($thumbnail != "") { ?>
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 margin-15">
+                            <div class="left-side">
+                                <?php echo wp_get_attachment_image($thumbnail, 'single_page');
+                                if ($nameplate != "") {
+                                    ?>
+                                    <span class="nameplate-insidepage"><?php echo $nameplate; ?></span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="right-side for-padding"><?php
+                        if((get_the_content()) != ""){
+                            the_content();
+                        }?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<?php endwhile; }else{?>
+    <h2 style="text-align: center">No Record Found</h2>
+<?php }
+get_footer(); ?>

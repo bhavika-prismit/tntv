@@ -1096,7 +1096,7 @@ label {
     font-weight: 700;
 }
 
-.contact-form span, .vaccancy-form span {
+.contact-form p, .vaccancy-form p {
     margin-bottom: 30px;
 }
 
@@ -1122,7 +1122,7 @@ textarea {
 .contact-form h2.block-heading, .vaccancy-form h2.block-heading {
     margin-bottom: 40px;
 }
-.contact-form span:last-child, .vaccancy-form span:last-child {
+.contact-form p:last-child, .vaccancy-form p:last-child {
     margin-bottom: 0;
     padding-top: 20px;
 }
@@ -1136,9 +1136,10 @@ button.btn.send-message,.wpcf7-submit {
     line-height: 26px;
     background-color: #29cccc;
     border-radius: 6px;
+	width: auto;
 }
 
-button.btn.send-message:hover {
+button.btn.send-message:hover, .wpcf7-submit:hover {
     border-color: #29cccc;
     background-color: #333333;
     color: #fff;
@@ -1298,4 +1299,49 @@ span.date-stamp-normal {
 }
 .social-sharing a.pinterest:hover span {
     background-color: #bd081c;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 700;
+}
+
+.navbar-header {
+    z-index: 1;
+}
+.page-inner-body table tr th {
+    background-color: #DAF1FF;
+}
+
+.page-inner-body table tr th:last-child, .page-inner-body table tr td:last-child {
+    text-align: center;
+}
+
+.page-inner-body table tr th:first-child, .page-inner-body table tr td:first-child {
+    text-align: center;
+}
+
+.page-inner-body table tr th:nth-child(2) {
+	text-align: center;
+}
+
+.page-inner-body table tr th:nth-child(3), .page-inner-body table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.page-inner-body table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+	margin-bottom: 0;
+}
+
+.page-inner-body table td, .page-inner-body table th {
+    border: 1px solid #ccc;
+}
+.inner-pages h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+.carosoul-area img {
+    width: 100%;
 }
