@@ -21,7 +21,7 @@ div, section {
   padding: 0px;
 }
 .navbar-brand>img {
-  padding: 15px;
+  margin: 15px;
   width: auto;
 }
 .navbar-brand {
@@ -322,9 +322,13 @@ h2.block-heading {
     border-bottom: 2px solid #29cccc;
     border-right: 2px solid #29cccc;
 }
+.image-block {
+    position:  relative;
+}
 .nameplate {
     position: absolute;
     bottom: 0;
+	left: 0;
     width: 100%;
     text-align: center;
     background: rgba(0,102,153,0.6);
@@ -972,6 +976,7 @@ section.inner-pages {
     font-size: 48px;
     font-weight: 700;
     margin: 0;
+	text-align: center;
 }
 .banner-area:after {
     content: "";
@@ -1028,7 +1033,7 @@ ol.rules li {
 
 section.inner-pages .facilities-icons span {
     border-color: #006699;
-    background-color: #cccccc;
+    background-color: #29cccc;
     color: #fff;
     cursor:  default;
 }
@@ -1061,18 +1066,18 @@ section.inner-pages .facilities-icons span {
 .inner-pages .facilities > .row > div:last-child {
     margin-bottom: 0;
 }
-.inner-pages .facilities .text-area ul li {
+.inner-pages .text-area ul li {
     line-height: 30px;
     position:  relative;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.inner-pages .facilities .text-area ul li, .text-area ul {
+.inner-pages .text-area ul li, .text-area ul {
     list-style-type: none;
 }
 
-.inner-pages .facilities .text-area ul li:before {
+.inner-pages .text-area ul li:before {
     content: "";
     background-image: url(../img/bullet.png);
 	width: 10px;
@@ -1096,7 +1101,7 @@ label {
     font-weight: 700;
 }
 
-.contact-form p, .vaccancy-form p {
+.contact-form p, .vaccancy-form span {
     margin-bottom: 30px;
 }
 
@@ -1122,9 +1127,8 @@ textarea {
 .contact-form h2.block-heading, .vaccancy-form h2.block-heading {
     margin-bottom: 40px;
 }
-.contact-form p:last-child, .vaccancy-form p:last-child {
+.contact-form p:last-child {
     margin-bottom: 0;
-    padding-top: 20px;
 }
 
 button.btn.send-message,.wpcf7-submit {
@@ -1344,4 +1348,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .carosoul-area img {
     width: 100%;
+}
+.archive-all .row {
+    margin-bottom: 60px;
 }

@@ -78,4 +78,9 @@ jQuery(document).ready(function () {
             }
         });
     });
+    //accordion
+    jQuery(function() {
+        jQuery("#accordion").accordion();
+        jQuery("#accordion1").accordion();
+    });
 });

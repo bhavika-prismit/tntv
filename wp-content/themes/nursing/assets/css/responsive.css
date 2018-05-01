@@ -34,6 +34,7 @@
 	}
 	.left-side img {
 		width: 100%;
+		height: auto;
 	}
 }
 @media (min-width: 1201px) {
@@ -155,6 +156,9 @@
 	}
 }
 @media (max-width: 767px) {
+	section.inner-pages .left-side {
+		text-align: center;
+	}
 	.activities > .row {
 		display: flex;
 		flex-wrap: wrap;
