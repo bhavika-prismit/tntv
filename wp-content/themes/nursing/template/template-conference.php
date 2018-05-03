@@ -35,7 +35,7 @@ get_header(); ?>
                                             <div class="insider-img"><?php echo get_the_post_thumbnail(get_the_ID(), "activities_page"); ?></div>
                                             <!--                                        <div class="insider-img"><img src="--><?php //echo get_template_directory_uri()?><!--/assets/img/activities-img.jpg" alt="" class="img-responsive"></div>-->
                                             <h2 class="block-heading"><?php the_title(); ?></h2>
-                                            <span class="date-stamp-normal"><?php echo get_the_date(); ?></span>
+<!--                                            <span class="date-stamp-normal">--><?php //echo get_the_date(); ?><!--</span>-->
                                             <p><?php the_content(); ?></p>
                                         </div>
                                         <div class="social-sharing">

@@ -555,6 +555,14 @@ function change_submenu_class($menu)
     $menu = preg_replace('/menu-item-has-children/', 'menu-item-has-children dropdown', $menu);
     $menu = preg_replace('/current-menu-item/', 'current-menu-item active', $menu);
     $menu = preg_replace('/current_page_parent/', 'current_page_parent active', $menu);
+    if(is_singular('activities'))
+    {
+        $menu = preg_replace('/activity_active/', 'activity_active active', $menu);
+    }
+    if(is_singular('conferences'))
+    {
+        $menu = preg_replace('/conference_active/', 'conference_active active', $menu);
+    }
     return $menu;
 }
 
@@ -564,6 +572,37 @@ function nav_submenu($title)
 {
     return '<span>' . $title . '</span>';
 }
+
+// custom menu active
+// class WPSE_45647_Walker extends Walker_Nav_Menu
+// {
+//     public function start_el( &$output, $item, $depth, $args )
+//     {
+//         $output .= $this->custom_content($item);
+//         parent::start_el( $output, $item, $depth, $args );
+//     }
+
+//     /**
+//      * Create your extra content here.
+//      * @return string
+//      */
+//     protected function custom_content( $item )
+//     {
+
+//         // inspect the item and return your
+//         // custom content as a string
+//     }
+// }
+
+// add_filter( 'walker_nav_menu_start_el', 'wpse_45647_add_custom_content', 10, 2 );
+// function wpse_45647_add_custom_content( $item_output, $item )
+// {
+
+//     static $counter = 0;
+//     // You may inspect $item and do something more creative here.
+//     $custom = ++$counter . ' Hello World!';
+//     return str_replace( '<a ', $custom . '<a ', $item_output );
+// }
 
 function arphabet_widgets_init()
 {

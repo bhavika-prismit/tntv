@@ -66,8 +66,10 @@ global $wp; ?>
                         </div>
                         <div id="navbar1" class="navbar-collapse collapse">
                             <?php
-                            wp_nav_menu(array('menu_class' => 'nav navbar-nav',
+                            wp_nav_menu(array(
+                                'menu_class' => 'nav navbar-nav',
                                 'menu' => 'header'
+                                // 'walker' => new WPSE_45647_Walker
                             )); ?>
                         </div>
                         <!--/.nav-collapse -->

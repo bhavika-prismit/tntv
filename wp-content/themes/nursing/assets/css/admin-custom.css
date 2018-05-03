@@ -1,10 +1,8 @@
 .wrap .col-sm-6 {
-    width: calc(50% - 20px);
+    width: 50%;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
-	margin-left: 10px;
-	margin-right: 10px;
 }
 
 
@@ -20,7 +18,7 @@
 }
 
 .wrap .col-sm-4 {
-    width: 25%;
+    width: 33.333%;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
@@ -32,9 +30,13 @@
     margin: auto;
     box-sizing: border-box;
 }
-
+.wrap .col-sm-12 {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .wrap .col-sm-8 {
-    width: 75%;
+    width: 66.666%;
     float: left;
     padding-left: 15px;
     padding-right: 15px;
@@ -44,17 +46,11 @@
     box-sizing: border-box;
 }
 
-.wrap .container > .row {
+.wrap .container .flex {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
 }
-
-.wrap #homeContent .container > .row > div {
-    margin-bottom: 30px;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-}
-
 .wrap label {
     font-weight: 700;
 	line-height: 29px;
@@ -66,8 +62,163 @@
 }
 
 .wrap input[type="text"], .wrap textarea {
-    width: 75%;
+    width: 100%;
+	margin-bottom: 20px;
 }
 .wrap input[type="checkbox"] {
 	margin: 7px 2px;
+}
+.application-list table th, .application-list table td {
+    width: calc(100% / 6);
+    border: 1px solid #ccc;
+}
+.application-list table td:first-child {
+	text-align: center;
+}
+
+.application-list table td img {
+    max-width: 80px;
+    height: auto;
+}
+
+
+table.custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+table.custom th, table.custom td {
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+table.custom td input[type="text"] {
+    width: 100%;
+	padding: 3px 8px;
+}
+table.custom thead th {
+    background-color: #e5f7ff;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+table.custom tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+table.custom tbody tr:nth-child(even) {
+    background-color: #ebebeb;
+}
+/*.wrap {
+	overflow: hidden;
+}
+*/
+.default {
+	background: #0085ba;
+    border-color: #0073aa #006799 #006799;
+    box-shadow: 0 1px 0 #006799;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+	display: inline-block;
+    font-size: 13px;
+    line-height: 26px;
+    height: 28px;
+    padding: 0 10px 1px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    white-space: nowrap;
+	box-sizing: border-box;
+}
+.default:hover {
+	background: #008ec2;
+    border-color: #006799;
+    color: #fff;
+}
+.default:focus {
+	box-shadow: 0 1px 0 #0073aa, 0 0 2px 1px #33b3db;
+}
+.default:active {
+	background: #0073aa;
+    border-color: #006799;
+    box-shadow: inset 0 2px 0 #006799;
+    vertical-align: top;
+}
+h3.toggle-head {
+    background-color: #fff;
+    display: block;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    padding: 17px 20px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.home-content h3.toggle-head:focus {
+    outline:  none;
+}
+
+.toggle-blocks .toggle-body .toggle-body-inner {
+    border: 1px solid #ccc;
+    padding: 0 20px 15px 20px;
+    background-color: #e5f7ff;
+    border-top: none;
+}
+.toggle-blocks.active h3.toggle-head {
+    border-bottom: none !important;
+    background-color: #e5f7ff !important;
+	color: #0077b3 !important;
+	border-color: #0077b3 !important;
+}
+.toggle-blocks.active h3.toggle-head + .toggle-body .toggle-body-inner {
+	border-color: #0077b3 !important;
+}
+.toggle-blocks.active .toggle-body {
+	height: auto;
+}
+.home-content .avatar {
+    display: inline-block;
+}
+
+.home-content  button.upload-custom-img {
+    vertical-align: top;
+}
+
+.home-content  .avatar img {
+    height: 150px;
+    width: auto;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+.home-content .default {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+.toggle-body {
+    height: 0;
+	overflow: hidden;
+	transition: height 2s;
+}
+
+/*toggle*/
+.col-sm-6.active-panel {
+    position: absolute;
+    right: 0;
+    width: 50% !important;
+}
+
+.wrap .override-row .col-sm-6 {
+    width: 100%;
+}
+
+.wrap .override-row .col-sm-6 > div {
+    width: 50%;
+}
+.wrap .override-row .col-sm-6.active-panel >div ,
+.col-sm-6.active-panel > div {
+    width: 100%;
 }

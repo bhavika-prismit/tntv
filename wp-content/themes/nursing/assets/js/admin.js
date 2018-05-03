@@ -83,4 +83,12 @@ jQuery(document).ready(function () {
         jQuery("#accordion").accordion();
         jQuery("#accordion1").accordion();
     });
+
+    jQuery('.toggle-head').click(function(e){
+        jQuery(".toggle-head").parent().removeClass("active");
+        jQuery(".toggle-head").parent().parent().removeClass("active-panel");
+        jQuery(this).parent().addClass("active");
+        jQuery(this).parent().parent().addClass("active-panel");
+        jQuery(this).parents('.col-sm-12').addClass("override-row");
+    });
 });
