@@ -9,11 +9,16 @@ wp_enqueue_media();
 $content = get_option('home_about_content');
 ?>
 <div class="wrap home-content">
-    <h1>Home Page Content</h1><br>
+	<div class="row">
+    <div class="col-sm-3 for-padding">
+	<h1>Home Page Content</h1>
+	</div>
+	</div>
     <form class="form-group" name="homeContent" id="homeContent" method="post" action="#" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+				<div class="row">
                         <?php for ($i = 1;$i <= 4;$i++) {
                          ?>
                             <div class="col-sm-6">
@@ -76,6 +81,7 @@ $content = get_option('home_about_content');
                                 </div>
                             </div>
                     <?php } ?>
+                </div>
                 </div>
             </div>
         </div>

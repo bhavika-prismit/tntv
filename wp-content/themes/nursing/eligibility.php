@@ -13,8 +13,7 @@ $content = get_option('eligibility_content');
           enctype="multipart/form-data">
 
         <div class="container">
-            <div class="row ">
-
+            <div class="row flex">
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm-4 form-group">
@@ -74,10 +73,13 @@ $content = get_option('eligibility_content');
                 </div>
             </div>
             <div class="row">
-                <button class="add_new_eligibility" id="add_new_eligibility">Add new</button>
+				<div class="col-sm-12">
+					<button class="add_new_eligibility default" id="add_new_eligibility">Add new</button>
+				</div>
             </div>
             <div class="row">
-                <table class="table table-striped table-responsive" id="add_eligibility_content">
+			<div class="col-sm-12 table">
+                <table class="table table-striped table-responsive custom" id="add_eligibility_content">
                     <thead>
                     <tr>
                         <th></th>
@@ -121,7 +123,10 @@ $content = get_option('eligibility_content');
                     </tbody>
                 </table>
             </div>
+			</div>
         </div>
-        <button type="submit" name="eligibility_submit" id="eligibility_submit">Submit</button>
+		<div class="col-sm-12">
+			<button class="default" type="submit" name="eligibility_submit" id="eligibility_submit">Submit</button>
+		</div>
     </form>
 </div>

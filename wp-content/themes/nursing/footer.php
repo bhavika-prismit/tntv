@@ -87,6 +87,7 @@
         <div class="copyright-text"><?php echo isset($content['copyright']) ? $content['copyright'] : ""; ?></div>
     </div>
 </footer>
+<?php wp_footer(); ?>
 <div class="popups" style="display: none;">
     <div class="search-box">
         <div class="close-btn"><i class="fas fa-times"></i></div>

@@ -194,7 +194,7 @@ h3.toggle-head {
 	margin-bottom: 20px;
 	margin-right: 20px;
 }
-.home-content .default {
+.home-content .default, .facility_content .default {
     margin-top: 60px;
     margin-bottom: 20px;
 }
@@ -218,7 +218,15 @@ h3.toggle-head {
 .wrap .override-row .col-sm-6 > div {
     width: 50%;
 }
-.wrap .override-row .col-sm-6.active-panel >div ,
-.col-sm-6.active-panel > div {
+.wrap .override-row .col-sm-6.active-panel > div , .col-sm-6.active-panel > div {
     width: 100%;
+}
+.for-padding {
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+.for-padding input[type="checkbox"] {
+	vertical-align: middle;
+	margin-right: 10px;
 }

@@ -356,6 +356,7 @@ get_header(); ?>
 
                                 ?>
                                 <div class="slides">
+                                <a href="<?php echo get_post_permalink($post[$i]->ID); ?>">
                                     <div class="slide-pic">
                                         <span class="date-stamp"><?php echo date('d M Y', strtotime($post[$i]->post_date)); ?></span>
                                         <img src="<?php echo $url; ?>"
@@ -376,6 +377,7 @@ get_header(); ?>
                                            href="<?php echo get_post_permalink($post[$i]->ID); ?>">Read
                                             More</a>
                                     </div>
+                                    </a>
                                 </div>
                                 <?php
                             }

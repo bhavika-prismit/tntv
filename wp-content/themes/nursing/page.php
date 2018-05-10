@@ -7,23 +7,37 @@
  */
 get_header();
 if (have_posts()) : while (have_posts()) : the_post();
+    global $post;
     $image = get_field('banner');
     if (isset($image['url'])) {
-        $url = $image['url'];
+        // $url = $image['url'];
+        $url = wp_get_attachment_url($image['id'], "banner");
+        // $url = $image['sizes']['banner'];
     } else {
         $url = get_template_directory_uri() . '/assets/img/slider-01.jpg';
     }
     $nameplate = get_field('name_plate');
-    ?>
-    <div class="banner-section">
-        <div class="banner-area" style="background-image:url(<?php echo $url; ?>)">
-            <div class="banner-text-area">
-                <h2><?php the_title(); ?></h2>
-                <span class="border-left"></span><span class="border-right"></span>
+    $slider = get_field('slider');
+    if ($slider != "") {
+        echo($slider);
+    } else {
+        ?>
+        <div class="banner-section">
+            <div class="banner-area" style="background-image:url(<?php echo $url; ?>)">
+                <div class="banner-text-area">
+                    <h2><?php the_title(); ?></h2>
+                    <span class="border-left"></span><span class="border-right"></span>
+                </div>
             </div>
+            <span class="left-white-area"></span><span class="right-white-area"></span>
         </div>
-        <span class="left-white-area"></span><span class="right-white-area"></span>
-    </div>
+    <?php }
+    $slider_title = get_field('slider_title');
+    if (isset($slider_title) && $slider_title[0] == 1) { ?>
+        <div class="slider-title">
+            <h2><?php the_title(); ?></h2>
+        </div>
+    <?php } ?>
     <div class="content-area">
         <section class="inner-pages">
             <div class="container">
@@ -42,12 +56,13 @@ if (have_posts()) : while (have_posts()) : the_post();
                         </div>
                     <?php } ?>
                     <div class="right-side for-padding"><?php
-                        if((get_the_content()) != ""){
+                        if ((get_the_content()) != "") {
                             the_content();
-                        }else{?>
+                        } else {
+                            ?>
                             <h2 style='text-align: center'>Comming soon..............</h2>
                         <?php }
-                         ?>
+                        ?>
                     </div>
                 </div>
             </div>

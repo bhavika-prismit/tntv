@@ -134,7 +134,7 @@ span.logo-text {
     position:  relative;
 }
 
-.navigation-menu-div .nav > li.active a span:after {
+.navigation-menu-div .nav > li.active > a > span:after {
     content: "";
     height: 10px;
     width: 10px;
@@ -1066,18 +1066,18 @@ section.inner-pages .facilities-icons span {
 .inner-pages .facilities > .row > div:last-child {
     margin-bottom: 0;
 }
-.inner-pages .text-area ul li {
+ul.custom-ul li {
     line-height: 30px;
     position:  relative;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.inner-pages .text-area ul li, .text-area ul {
+ul.custom-ul li, ul.custom-ul {
     list-style-type: none;
 }
 
-.inner-pages .text-area ul li:before {
+ul.custom-ul li:before {
     content: "";
     background-image: url(../img/bullet.png);
 	width: 10px;
@@ -1199,6 +1199,7 @@ button.btn.send-message:hover, .wpcf7-submit:hover {
     margin-bottom: 30px;
     max-height: 270px;
     overflow: hidden;
+    text-align: center;
 }
 
 span.date-stamp-normal {
@@ -1351,4 +1352,105 @@ h1, h2, h3, h4, h5, h6 {
 }
 .archive-all .row {
     margin-bottom: 60px;
+}
+.tables > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tables > table.first-table tr:last-child td, .tables > table.first-table, .tables > table.first-table tr:nth-child(2) td:first-child {border-bottom: none !important;}
+
+.tables > table td span {
+    display: block;
+}
+
+.tables > table.first-table tr td:first-child {
+    width: 130px;
+}
+
+.tables > table tr td, .tables > table tr th {
+    padding: 12px;
+    vertical-align: text-top;
+}
+.tables > table tr th {
+	text-align: center;
+}
+.tables > table.first-table tr td:nth-child(2), .tables > table.first-table tr:nth-child(3) td {
+    text-align: left;
+    font-weight: 600;
+}
+.tables > table.second-table thead tr:first-child td, .tables > table.third-table thead tr:first-child td {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.tables > table.second-table {
+    margin-bottom: 40px;
+}
+
+
+.tables > table.second-table tbody tr td:nth-child(2) {
+    text-align: center;
+}
+
+.tables > table.second-table tbody tr td:nth-child(3), .tables > table.second-table tbody tr td:nth-child(4) {
+    text-align: left;
+}
+
+.tables > table.second-table tbody tr td:nth-child(3) span.bullet {
+    width: 7px;
+    height: 7px;
+    background-color: #000;
+    border-radius: 50%;
+    position:  absolute;
+    left: 15px;
+    top: 20px;
+}
+
+.tables > table.second-table tbody tr td:nth-child(3) {
+    position: relative;
+    padding-left: 40px;
+}
+
+.tables > table.second-table tbody tr td[colspan="4"] {
+    font-weight: 600;
+}
+.tables > table.third-table tbody tr td:nth-child(2), .tables > table.third-table tbody tr td:nth-child(3), .tables > table.third-table tbody tr td:nth-child(2), .tables > table.third-table tbody tr td:nth-child(4) {text-align: left;}
+.tables > table.first-table tr:nth-child(3) td {
+    width: 175px;
+}
+ul.custom-ul ul li:before {
+    content: "\f101";
+    background-image: none;
+    width: auto;
+    height: auto;
+    font-family: Fontawesome;
+    top: 0;
+    left: -30px;
+}
+.insider-heading ul {
+    margin-bottom: 30px;
+}
+.lg-actions , .fancybox-navigation {
+    position:  initial;
+}
+.insider-heading img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.insider-heading span.date-stamp-normal {
+    margin-bottom: 0;
+}
+.alignright {
+    float: right;
+}
+
+.insider-heading h4, .insider-heading .h4, .insider-heading h5, .insider-heading .h5, .insider-heading h6, .insider-heading .h6 {
+    margin-bottom: 0;
+}
+td, th {
+    padding: 0;
+    vertical-align: text-top;
 }

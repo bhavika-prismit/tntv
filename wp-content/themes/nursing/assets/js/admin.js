@@ -78,11 +78,6 @@ jQuery(document).ready(function () {
             }
         });
     });
-    //accordion
-    jQuery(function() {
-        jQuery("#accordion").accordion();
-        jQuery("#accordion1").accordion();
-    });
 
     jQuery('.toggle-head').click(function(e){
         jQuery(".toggle-head").parent().removeClass("active");

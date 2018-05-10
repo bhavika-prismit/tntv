@@ -264,10 +264,12 @@ add_action('init', 'create_post_type');
 add_theme_support('post-thumbnails');
 // Add other useful image sizes for use through Add Media modal
 add_image_size('page_slider', 1284, 900, false);
+add_image_size('banner', 1284, 0,array('center','top'));
 add_image_size('activities_page', 870, 0, false);
 add_image_size('courses_offer', 320, 320, false);
-add_image_size('recent_activity', 270, 270, false);
+add_image_size('recent_activity', 270, 270, array('center','center'));
 add_image_size('single_page', 263, 263, false);
+add_image_size('staff', 120, 120, false);
 
 //make filter for resize
 //add_filter('image_size_names_choose', 'wpshout_custom_sizes');
