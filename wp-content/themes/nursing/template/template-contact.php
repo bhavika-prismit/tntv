@@ -36,7 +36,8 @@ $image = get_field('banner');
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <div class="contact-form">
                                     <h2 class="block-heading">Contact Us</h2>
-                                    <?php echo do_shortcode('[contact-form-7 id="295" title="Contact form 1"]');?>
+                                    <?php echo do_shortcode('[contact-form-7 id="295" title="Contact form 1"]'); 
+                                    ?>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -51,9 +52,15 @@ $image = get_field('banner');
                                             echo isset($content['country']) ? ", " . $content['country']."." : "";
                                             ?>
                                         </p>
-                                        <p class="phone"><?php echo isset($content['phone']) ? "+91" . $content['phone'] : ""; ?></p>
-                                        <p class="mobile"><?php echo isset($content['mobile']) ? "+91" . $content['mobile'] : ""; ?></p>
-                                        <p class="email"><?php echo isset($content['email']) ? $content['email'] : ""; ?></p>
+                                        <p class="phone">
+                                             <a href="tel:<?php echo isset($content['phone']) ? '+91' . $content['phone'] : ''; ?>"><?php echo isset($content['phone']) ? "+91" . $content['phone'] : ""; ?></a>
+                                        </p>
+                                        <p class="mobile">
+                                        <a href="tel:<?php echo isset($content['mobile']) ? '+91' . $content['mobile'] : ''; ?>"><?php echo isset($content['mobile']) ? "+91" . $content['mobile'] : ""; ?></a>
+                                        </p>
+                                        <p class="email">
+                                         <a href="mailto:<?php echo isset($content['email']) ? $content['email'] : ''; ?>">Email: <?php echo isset($content['email']) ? $content['email'] : ""; ?></a>                               
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -161,7 +161,7 @@ function hide_adminbar()
         show_admin_bar(false);
 }
 
-add_action('init', 'hide_adminbar');
+// add_action('init', 'hide_adminbar');
 
 function wpdocs_theme_name_scripts()
 {
@@ -174,7 +174,9 @@ function wpdocs_theme_name_scripts()
 
     wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.js');
     wp_enqueue_script('slick', get_template_directory_uri() . '/assets/js/slick.js');
+    wp_enqueue_script('jquery-validate', get_template_directory_uri() . '/assets/js/jquery.validate.js');
     wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/custom.js', array('jquery'));
+    wp_localize_script( 'custom', 'tntv_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 
 add_action('wp_enqueue_scripts', 'wpdocs_theme_name_scripts');
@@ -265,12 +267,13 @@ add_theme_support('post-thumbnails');
 // Add other useful image sizes for use through Add Media modal
 add_image_size('page_slider', 1284, 900, false);
 add_image_size('banner', 1284, 0,array('center','top'));
-add_image_size('activities_page', 870, 0, false);
-add_image_size('courses_offer', 320, 320, false);
+add_image_size('activities_page', 870, 0, array('center','top'));
+add_image_size('courses_offer', 330,330,array('center','center'));
 add_image_size('recent_activity', 270, 270, array('center','center'));
-add_image_size('single_page', 263, 263, false);
+add_image_size('single_page', 263, 263, array('center','center'));
 add_image_size('staff', 120, 120, false);
-
+add_image_size('album', 348, 0, false);
+add_image_size('home_content', 165, 165, false);
 //make filter for resize
 //add_filter('image_size_names_choose', 'wpshout_custom_sizes');
 //function wpshout_custom_sizes($sizes)
@@ -565,6 +568,10 @@ function change_submenu_class($menu)
     {
         $menu = preg_replace('/conference_active/', 'conference_active active', $menu);
     }
+    if(is_singular('courses'))
+    {
+        $menu = preg_replace('/courses_active/', 'courses_active active', $menu);
+    }
     return $menu;
 }
 
@@ -625,63 +632,83 @@ add_action('widgets_init', 'arphabet_widgets_init');
 function saveApplication()
 {
     global $wpdb, $message;
+    $message=array();
 
     if (isset($_POST['application_submit'])) {
-        $error = false;
-        $place_holders = $_POST;
-        $post_id = $_POST['post_id'];
-        unset($place_holders['application_submit']);
-        unset($place_holders['post_id']);
 
-        if ($_POST['name'] == "") {
+        if( !isset( $_POST['pf_added'] ) || !wp_verify_nonce( $_POST['pf_added'], 'add-item' ) ) {return;}
+        $error = false;
+        $post_id = $_POST['post_id'];
+        $place_holders = array(
+            'applicant_name'=>$_POST['applicant_name'],
+            'email'=>$_POST['email'],
+            'ptitle'=>$_POST['ptitle'],
+            'address'=>$_POST['address']
+            );
+
+        if ($_POST['applicant_name'] == "") {
             $error = true;
-            $message = "You did not enter a name.";
+            $message['applicant_name'] = "You did not enter a name.";
         } //check if the address
         if (trim($_POST['address']) == "") {
             $error = true;
-            $message = "Please enter address.";
+            $message['address'] = "Please enter address.";
         }
         if ($_POST['ptitle'] == "") {
             $error = true;
-            $message = "Enter any title.";
+            $message['ptitle'] = "Enter any title.";
         } //check if upload resume is empty
         if ($_FILES['resumeupload']['name'] == "") {
             $error = true;
-            $message = "You did not select resume.";
+            $message['resumeupload'] = "You did not select resume.";
         } //check for valid email
         if (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $_POST['email'])) {
             $error = true;
-            $message = "You did not enter a valid email.";
+            $message['email'] = "You did not enter a valid email.";
         }
-        if ($error != true) {
+        if ($error == false) {
             //upload manually image file
             foreach ($_FILES as $key => $value) {
                 $emb_file = $_FILES[$key];
                 if ($emb_file != 0) {
-                    $file = $emb_file['tmp_name'];
-                    $filename = $emb_file['name'];
-                    $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
-                    if (!$upload_file['error']) {
-                        $wp_filetype = wp_check_filetype($filename, null);
-                        $attachment = array(
-                            'post_mime_type' => $upload_file['type'],
-                            'post_parent' => '',
-                            'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
-                            'post_content' => '',
-                            'post_status' => 'inherit'
-                        );
-                        $attachment_id = wp_insert_attachment($attachment, $upload_file['file']);
-                        if (!is_wp_error($attachment_id)) {
-                            require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-                            $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_file['file']);
-                            wp_update_attachment_metadata($attachment_id, $attachment_data);
-                        }
-                        $place_holders[$key] = $attachment_id;
+                    if($key == "photoupload"){
+                         $types = array('image/jpeg','image/png');
+                    }
+                    else{
+                        $types = array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                    }
+                    if (in_array($emb_file['type'], $types) && $emb_file['size'] >= 2048) {
+                        $file = $emb_file['tmp_name'];
+                        $filename = $emb_file['name'];
+                        $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
+                        if (!$upload_file['error']) {
+                            
+                            $attachment = array(
+                                'post_mime_type' => $upload_file['type'],
+                                'post_parent' => '',
+                                'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+                                'post_content' => '',
+                                'post_status' => 'inherit'
+                            );
+                            $attachment_id = wp_insert_attachment($attachment, $upload_file['file']);
+                            if (!is_wp_error($attachment_id)) {
+                                require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                                $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_file['file']);
+                                wp_update_attachment_metadata($attachment_id, $attachment_data);
+                            }
+                            $place_holders[$key] = $attachment_id;
+                        }  
+                    }
+                    else{
+                        $error = true;
+                        $message['file'] = "File type isnot allowed.";
                     }
                 }
             }
-            $wpdb->insert("wp_application", $place_holders);
-            $message = "Successfully Inserted.";
+            if($error == false){
+              $wpdb->insert("wp_application", $place_holders);
+              $message = "Successfully Inserted.";  
+            }
         }
         wp_redirect(get_permalink($post_id) . '?msg=' . $error);
         exit;
@@ -689,3 +716,15 @@ function saveApplication()
 }
 
 add_action('init', 'saveApplication');
+
+function posts_for_current_author($query) {
+    if($query->is_admin) {
+        if ($query->get('post_type') == 'courses')
+        {
+            $query->set('orderby', 'menu_order');
+            $query->set('order', 'ASC');
+        }
+    }
+    return $query;
+}
+add_filter('pre_get_posts', 'posts_for_current_author');

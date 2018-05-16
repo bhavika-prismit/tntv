@@ -9,7 +9,11 @@ global $wpdb;
 $result = $wpdb->get_results("SELECT * FROM `wp_application`");
 ?>
 <div class="wrap application-list">
-    <h1>Job application List</h1><br>
+	<div class="row">
+		<div class="col-sm-3 for-padding">
+			<h1>Job application List</h1>
+		</div>
+	</div>
     <div class="container">
         <div class="row ">
 			<div class="col-sm-12 table">
@@ -32,7 +36,7 @@ $result = $wpdb->get_results("SELECT * FROM `wp_application`");
 							?>
 							<tr>
 								<td><?php echo isset($row->photoupload) ? wp_get_attachment_image($row->photoupload, 'thumbnail') : "-"; ?></td>
-								<td><?php echo isset($row->name) ? $row->name : ""; ?></td>
+								<td><?php echo isset($row->applicant_name) ? $row->applicant_name : ""; ?></td>
 								<td><?php echo isset($row->email) ? $row->email : ""; ?></td>
 								<td><?php echo isset($row->address) ? $row->address : ""; ?></td>
 								<td><?php echo isset($row->ptitle) ? $row->ptitle : ""; ?></td>

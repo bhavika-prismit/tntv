@@ -33,7 +33,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     if ($thumbnail != "") { ?>
                         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 margin-15">
                             <div class="left-side">
-                                <?php echo wp_get_attachment_image($thumbnail, 'single_page');
+                                <?php echo wp_get_attachment_image($thumbnail, 'courses_offer');
                                 if ($nameplate != "") {
                                     ?>
                                     <span class="nameplate-insidepage"><?php echo $nameplate; ?></span>

@@ -6,7 +6,7 @@
  * Time: 5:32 PM
  */
 get_header();
-$url = get_template_directory_uri() . '/assets/img/slider-01.jpg';?>
+$url = get_template_directory_uri() . '/assets/img/slider-01.jpg'; ?>
     <div class="banner-section">
         <div class="banner-area" style="background-image:url(<?php echo $url; ?>)">
             <div class="banner-text-area">
@@ -16,37 +16,31 @@ $url = get_template_directory_uri() . '/assets/img/slider-01.jpg';?>
         </div>
         <span class="left-white-area"></span><span class="right-white-area"></span>
     </div>
-<?php if (have_posts()) { while (have_posts()) : the_post();
-    $nameplate = get_field('name_plate');
-    ?>
     <div class="content-area">
-        <section class="inner-pages">
-            <div class="container">
-                <div class="row"><h2><?php the_title();?></h2></div>
-                <div class="row">
-                    <?php //$thumbnail = get_the_post_thumbnail();
-                    $thumbnail = get_post_thumbnail_id();
-                    if ($thumbnail != "") { ?>
-                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 margin-15">
-                            <div class="left-side">
-                                <?php echo wp_get_attachment_image($thumbnail, 'single_page');
-                                if ($nameplate != "") {
-                                    ?>
-                                    <span class="nameplate-insidepage"><?php echo $nameplate; ?></span>
-                                <?php } ?>
+    <section class="inner-pages">
+        <div class="container">
+        <?php if (have_posts()) {
+            while (have_posts()) : the_post();
+                if (is_search() && ($post->post_type == 'slider')) {
+                    continue;
+                }
+                ?>
+                <div class="search-result">
+                        <div class="row">                        
+                            <div class="for-padding">
+                            <a href="<?php the_permalink();?>">
+                            <h3><?php the_title(); ?></h3></a><?php
+                                if ((get_the_content()) != "") {
+                                    echo wp_trim_words( get_the_content(), 55 ,'...');
+                                } ?>
                             </div>
                         </div>
-                    <?php } ?>
-                    <div class="right-side for-padding"><?php
-                        if((get_the_content()) != ""){
-                            the_content();
-                        }?>
-                    </div>
-                </div>
-            </div>
+                 </div>   
+            <?php endwhile;
+        } else { ?>
+            <h2 style="text-align: center">No Record Found</h2>
+        <?php } ?>
+        </div>
         </section>
     </div>
-<?php endwhile; }else{?>
-    <h2 style="text-align: center">No Record Found</h2>
-<?php }
-get_footer(); ?>
+<?php get_footer(); ?>

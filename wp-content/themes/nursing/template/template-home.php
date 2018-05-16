@@ -87,7 +87,7 @@ get_header(); ?>
                                                     <div class="col-xs-12 col-sm-3 col-md-4 col-lg-4 picture-area">
                                                         <?php if (isset($content['avatar' . $i]) && $content['avatar' . $i] != "") { ?>
                                                             <div class="image-block">
-                                                                <?php echo wp_get_attachment_image($content['avatar' . $i]); ?>
+                                                                <?php echo wp_get_attachment_image($content['avatar' . $i],"home_content"); ?>
                                                                 <?php if (isset($content['avatar_name' . $i]) && $content['avatar_name' . $i] != "") {
                                                                     echo "<span class='nameplate'>" . $content['avatar_name' . $i] . "</span>";
                                                                 } ?>
@@ -215,7 +215,7 @@ get_header(); ?>
                     <?php $args = array('post_type' => 'courses', 'posts_per_page' => 3);
                     $loop = new WP_Query($args);
                     while ($loop->have_posts()) : $loop->the_post();
-                        $url = get_the_post_thumbnail_url(get_the_ID(), "recent_activity");
+                        $url = get_the_post_thumbnail_url(get_the_ID(), "courses_offer");
                         if ($url == "") {
                             $url = get_template_directory_uri() . '/assets/img/logo.png';
                         }
@@ -332,7 +332,9 @@ get_header(); ?>
                 </div>
             </section>
         <?php }
-        $post = get_posts();
+        $args = array('post_type' => 'activities', 'posts_per_page' => 10);
+        $loop = new WP_Query($args);
+        $post = get_posts($args);
         ?>
         <section class="recent">
             <div class="overflow-control">
@@ -345,9 +347,6 @@ get_header(); ?>
                         <?php
                         $count = count($post);
                         if ($count > 0) {
-                            if ($count > 10) {
-                                $count = 10;
-                            }
                             for ($i = 0; $i < $count; $i++) {
                                 $url = get_the_post_thumbnail_url($post[$i]->ID, "recent_activity");
                                 if ($url == "") {
@@ -366,8 +365,8 @@ get_header(); ?>
                                     <p><?php if (isset($post[$i]->post_content)) {
                                             $str = $post[$i]->post_content;
                                             $length = strlen($str);
-                                            $str = substr($str, 0, 60);
-                                            if ($length > 60) {
+                                            $str = substr($str, 0, 50);
+                                            if ($length > 50) {
                                                 $str .= "...";
                                             }
                                             echo $str;

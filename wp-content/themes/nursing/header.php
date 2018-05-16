@@ -18,6 +18,12 @@ global $wp; ?>
     <div class="navbar-area">
         <div class="search-box-area">
             <div class="container-1510">
+                <div class="for-mobile">
+                        <ul>
+                            <li class="facebook"><a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(home_url($wp->request));?>"><span><i class="fab fa-facebook-f"></i></span></a></li>
+                            <li class="mobile-search"><span class="search-icon"><i class="fas fa-search"></i></span></li>
+                        </ul>
+                </div>
                 <div class="social-icons">
                     <ul>
                         <li class="facebook"><a
@@ -66,10 +72,8 @@ global $wp; ?>
                         </div>
                         <div id="navbar1" class="navbar-collapse collapse">
                             <?php
-                            wp_nav_menu(array(
-                                'menu_class' => 'nav navbar-nav',
+                            wp_nav_menu(array('menu_class' => 'nav navbar-nav',
                                 'menu' => 'header'
-                                // 'walker' => new WPSE_45647_Walker
                             )); ?>
                         </div>
                         <!--/.nav-collapse -->

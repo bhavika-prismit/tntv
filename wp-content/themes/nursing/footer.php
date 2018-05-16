@@ -51,13 +51,13 @@
                                 echo isset($content['country']) ? ", " . $content['country'] : "";
                                 ?></p>
                             <p>
-                                <a href="tel:">Phone: <?php echo isset($content['phone']) ? "+91" . $content['phone'] : ""; ?></a>
+                                <a href="tel:<?php echo isset($content['phone']) ? '+91' . $content['phone'] : ''; ?>">Phone: <?php echo isset($content['phone']) ? "+91" . $content['phone'] : ""; ?></a>
                             </p>
                             <p>
-                                <a href="tel:">Mobile: <?php echo isset($content['mobile']) ? "+91" . $content['mobile'] : ""; ?></a>
+                                <a href="tel:<?php echo isset($content['mobile']) ? '+91' . $content['mobile'] : ''; ?>">Mobile: <?php echo isset($content['mobile']) ? "+91" . $content['mobile'] : ""; ?></a>
                             </p>
                             <p>
-                                <a href="mailto:">Email: <?php echo isset($content['email']) ? $content['email'] : ""; ?></a>
+                                <a href="mailto:<?php echo isset($content['email']) ? $content['email'] : ''; ?>">Email: <?php echo isset($content['email']) ? $content['email'] : ""; ?></a>
                             </p>
                         </div>
                     </div>
@@ -91,9 +91,13 @@
 <div class="popups" style="display: none;">
     <div class="search-box">
         <div class="close-btn"><i class="fas fa-times"></i></div>
-        <input type="search" id="keyword-search" placeholder="Type your keywords">
+        <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+                        <input type="search" id="keyword-search" name="s" placeholder="Type your keywords">
+                        <span class="search-icon"><i class="fas fa-search"></i></span>
+                    </form>
+        <!-- <input type="search" id="keyword-search" placeholder="Type your keywords">
         <button class="btn search-button">Search</button>
-    </div>
+ -->    </div>
 </div>
 <script type="text/javascript">
     var surat, options, map, map1, marker, marker1;

@@ -17,9 +17,21 @@ if (have_posts()) : while (have_posts()) : the_post();
         $url = get_template_directory_uri() . '/assets/img/slider-01.jpg';
     }
     $nameplate = get_field('name_plate');
-    $slider = get_field('slider');
+    $slider = get_field('slider'); ?>
+
+    <?php
     if ($slider != "") {
+        echo '<div class="n2s-slider">';
         echo($slider);
+        $slider_title = get_field('slider_title');
+        if (isset($slider_title) && $slider_title[0] == 1) { ?>
+            <div class="slider-title">
+                <h2><?php the_title(); ?></h2>
+                <span class="border-left"></span><span class="border-right"></span>
+            </div>
+            <?php
+        }
+        echo '</div>';
     } else {
         ?>
         <div class="banner-section">
@@ -31,13 +43,8 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
             <span class="left-white-area"></span><span class="right-white-area"></span>
         </div>
-    <?php }
-    $slider_title = get_field('slider_title');
-    if (isset($slider_title) && $slider_title[0] == 1) { ?>
-        <div class="slider-title">
-            <h2><?php the_title(); ?></h2>
-        </div>
     <?php } ?>
+
     <div class="content-area">
         <section class="inner-pages">
             <div class="container">
