@@ -71,13 +71,13 @@ jQuery(document).ready(function ($) {
             },
             address: "required",
             ptitle: "required",
-            photoupload: {
+            // photoupload: {
                 // extension : "png|jpg|jpeg",
                 // maxFileSize: {
                 //         "unit": "KB",
                 //         "size": 100
                 //     }
-            },
+            // },
             resumeupload: {
                 required: true,
                 // extension: "pdf|docx",
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
             email: "Please enter a valid email address",
             address: "Please enter address",
             ptitle: "Please enter professional title",
-            photoupload: "Incorrect file selected.",
+            // photoupload: "Incorrect file selected.",
             resumeupload: "Resume is required",
             hiddenRecaptcha: "Captcha is required"
         },

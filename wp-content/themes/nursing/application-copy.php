@@ -9,10 +9,15 @@ global $wpdb;
 $result = $wpdb->get_results("SELECT * FROM `wp_application`");
 ?>
 <div class="wrap application-list">
-    <h1>Job application List</h1><br>
+    <div class="row">
+        <div class="col-sm-3 for-padding">
+            <h1>Job application List</h1>
+        </div>
+    </div>
     <div class="container">
         <div class="row ">
             <div class="col-sm-12 table">
+            <div id="message-delete"></div>
                 <table class="custom table table-condensed table-striped table-responsive table-hover" id="application_content">
                     <thead>
                     <tr>
@@ -22,6 +27,7 @@ $result = $wpdb->get_results("SELECT * FROM `wp_application`");
                         <th>Address</th>
                         <th>Professional Title</th>
                         <th>Resume</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,18 +38,19 @@ $result = $wpdb->get_results("SELECT * FROM `wp_application`");
                             ?>
                             <tr>
                                 <td><?php echo isset($row->photoupload) ? wp_get_attachment_image($row->photoupload, 'thumbnail') : "-"; ?></td>
-                                <td><?php echo isset($row->name) ? $row->name : ""; ?></td>
+                                <td><?php echo isset($row->applicant_name) ? $row->applicant_name : ""; ?></td>
                                 <td><?php echo isset($row->email) ? $row->email : ""; ?></td>
                                 <td><?php echo isset($row->address) ? $row->address : ""; ?></td>
                                 <td><?php echo isset($row->ptitle) ? $row->ptitle : ""; ?></td>
                                 <td><?php echo isset($row->resumeupload) ? '<a href="' . wp_get_attachment_url($row->resumeupload) . '" download>Download</a>' : "-"; ?></td>
+                                <td><a class="delete-application" href="#" data-id="<?php echo isset($row->id)?$row->id:"";?>" data-photoupload="<?php echo isset($row->photoupload)?$row->photoupload:"";?>" data-resumeupload="<?php echo isset($row->resumeupload)?$row->resumeupload:"";?>">Delete</a></td>
                             </tr>
                         <?php }
                     } ?>
                     </tbody>
                 </table>
+                <?php  ?>
             </div>
         </div>
     </div>
 </div>
-

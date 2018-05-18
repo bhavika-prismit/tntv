@@ -1,5 +1,4 @@
-
-jQuery(document).ready(function () {
+jQuery(document).ready(function ($) {
     jQuery(function ($) {
 
         // Set all variables to be used in scope
@@ -59,31 +58,66 @@ jQuery(document).ready(function () {
         });
     });
     //mask for phone number
-    jQuery(function($){
+    jQuery(function ($) {
 
         $(".phone").mask("(999) 999-9999");
 
 
-        $(".phone").on("blur", function() {
-            var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+        $(".phone").on("blur", function () {
+            var last = $(this).val().substr($(this).val().indexOf("-") + 1);
 
-            if( last.length == 5 ) {
-                var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+            if (last.length == 5) {
+                var move = $(this).val().substr($(this).val().indexOf("-") + 1, 1);
 
-                var lastfour = last.substr(1,4);
+                var lastfour = last.substr(1, 4);
 
-                var first = $(this).val().substr( 0, 9 );
+                var first = $(this).val().substr(0, 9);
 
-                $(this).val( first + move + '-' + lastfour );
+                $(this).val(first + move + '-' + lastfour);
             }
         });
     });
 
-    jQuery('.toggle-head').click(function(e){
+// facility & Home page toggle
+    jQuery('.toggle-head').click(function (e) {
         jQuery(".toggle-head").parent().removeClass("active");
         jQuery(".toggle-head").parent().parent().removeClass("active-panel");
         jQuery(this).parent().addClass("active");
         jQuery(this).parent().parent().addClass("active-panel");
         jQuery(this).parents('.col-sm-12').addClass("override-row");
+    });
+
+    // delete application
+    $('.delete-application').on('click', function (e) {
+        e.preventDefault();
+        var post_id = $(this).data('id');
+        var photoupload = $(this).data('photoupload');
+        var resumeupload = $(this).data('resumeupload');
+        if(post_id != ""){
+            $(this).parents("tr").remove(); 
+            jQuery.ajax({
+                url: tntv_admin_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tntv_delete_application',
+                    'post_id': post_id,
+                    'photoupload' :photoupload,
+                    'resumeupload' : resumeupload
+                },
+                success: function (response) {
+                    var result = JSON.parse(response);
+                    var message ="";
+                    if(result['message'] == "success"){
+                        message = '<div class="delete-success">Successfully Deleted</div>'; 
+                        
+                    }else{
+                        message = '<div class="delete-error">Error while delete application.</div>';
+                    }
+                    setInterval(function(){ 
+                            document.getElementById("message-delete").innerHTML = message; 
+                        }, 1000);
+                }
+            });
+        }
     });
 });

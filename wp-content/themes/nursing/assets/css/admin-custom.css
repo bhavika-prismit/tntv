@@ -282,3 +282,16 @@ h3.toggle-head {
     margin-left: 0;
     margin-right: 0;
 }
+div#message-delete .delete-success {
+    color: green;
+}
+div#message-delete .delete-error {
+    color: red;
+}
+div#message-delete .delete-success, div#message-delete .delete-error {
+    font-size: 20px;
+    font-weight: 600; 
+    display: block;
+    position:  absolute;
+    width: 100%;
+}
