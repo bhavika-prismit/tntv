@@ -9,7 +9,7 @@
 get_header(); ?>
 
     <div class="carosoul-area">
-        <div id="myCarousels" class="carousel slide" data-ride="carousel" data-interval="false">
+        <div id="myCarousels" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousels" data-slide-to="0" class="active"></li>
@@ -144,14 +144,14 @@ get_header(); ?>
                                                     stripslashes(trim($content['description' . $i])) : ""; ?></p>
                                             <?php if (isset($content['read_more' . $i]) && $content['read_more' . $i] != "") { ?>
                                                 <a class="readmore"
-                                                   href="<?php echo isset($content['read_more' . $i]) ? trim($content['read_more' . $i]) : ""; ?>">Read
+                                                   href="<?php echo isset($content['view_all'])?$content['view_all']."#".$content['icon_class' . $i]:""; ?>">Read
                                                     More</a>
                                             <?php } ?>
                                         </div>
                                         <?php if (isset($content['icon_class' . $i]) && $content['icon_class' . $i] != "") { ?>
-                                            <div class="facilities-icons"><span><i
+                                           <a href="<?php echo isset($content['view_all'])?$content['view_all']."#".$content['icon_class' . $i]:""; ?>"> <div class="facilities-icons"><span><i
                                                             class="<?php echo isset($content['icon_class' . $i]) ? trim($content['icon_class' . $i]) : ""; ?>"></i></span>
-                                            </div>
+                                            </div></a>
                                         <?php } ?>
                                     </div>
 
@@ -181,9 +181,9 @@ get_header(); ?>
 
                                     <div class="facilities-block">
                                         <?php if (isset($content['icon_class' . $i]) && $content['icon_class' . $i] != "") { ?>
-                                            <div class="facilities-icons"><span><i
+                                            <a href="<?php echo $content['view_all']."#".$content['icon_class' . $i]; ?>"><div class="facilities-icons"><span><i
                                                             class="<?php echo isset($content['icon_class' . $i]) ? trim($content['icon_class' . $i]) : ""; ?>"></i></span>
-                                            </div>
+                                            </div></a>
                                         <?php } ?>
                                         <div class="facilities-text">
                                             <h3><?php echo isset($content['title' . $i]) ? $content['title' . $i] : ""; ?></h3>
@@ -191,7 +191,7 @@ get_header(); ?>
                                                     stripslashes(trim($content['description' . $i])) : ""; ?></p>
                                             <?php if (isset($content['read_more' . $i]) && $content['read_more' . $i] != "") { ?>
                                                 <a class="readmore"
-                                                   href="<?php echo isset($content['read_more' . $i]) ? trim($content['read_more' . $i]) : ""; ?>">Read
+                                                    href="<?php echo isset($content['view_all'])?$content['view_all']."#".$content['icon_class' . $i]:""; ?>">Read
                                                     More</a>
                                             <?php } ?>
                                         </div>

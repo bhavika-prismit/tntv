@@ -528,7 +528,7 @@ function facilities_func()
                 <?php
                 while ($loop->have_posts()) : $loop->the_post();
                     ?>
-                    <div>
+                    <div id="<?php echo get_field('icon_class'); ?>">
                         <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
                             <div class="facilities-icons">
                                 <?php $icon = get_field('icon_class');
