@@ -269,9 +269,10 @@ add_theme_support('post-thumbnails');
 add_image_size('page_slider', 1284, 900, false);
 add_image_size('banner', 1284, 0, array('center', 'top'));
 add_image_size('activities_page', 870, 0, array('center', 'top'));
+add_image_size('facilities_page', 870, 330, array('center', 'center'));
 add_image_size('courses_offer', 330, 330, array('center', 'center'));
 add_image_size('recent_activity', 270, 270, array('center', 'center'));
-add_image_size('single_page', 263, 263, array('center', 'center'));
+add_image_size('single_page', 263, 263);
 add_image_size('staff', 120, 120, false);
 add_image_size('album', 348, 0, false);
 add_image_size('home_content', 165, 165, false);
@@ -519,7 +520,7 @@ add_action('init', 'wpb_custom_new_menu');
 //Facilities Shortcode
 function facilities_func()
 {
-    $args = array('post_type' => 'facilities', 'posts_per_page' => 10);
+    $args = array('post_type' => 'facilities', 'posts_per_page' => 20);
     $loop = new WP_Query($args);
     ?>
     <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
@@ -541,7 +542,15 @@ function facilities_func()
                         </div>
                         <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
                             <div class="text-area"><h3><?php the_title(); ?></h3>
-                                <p><?php the_content(); ?></p></div>
+                                <p><?php 
+                                $str = "";
+                                $str = get_the_content();
+                                    $length = strlen($str);                                
+                                    $str = substr($str, 0, 500);
+                                    if ($length > 500) {
+                                        $str .= " ......<a href=".get_post_permalink().">Read More</a>";
+                                    }
+                                    echo $str;?></p></div>
                         </div>
                     </div>
                 <?php endwhile;
@@ -570,6 +579,9 @@ function change_submenu_class($menu)
     }
     if (is_singular('courses')) {
         $menu = preg_replace('/courses_active/', 'courses_active active', $menu);
+    }
+    if (is_singular('facilities')) {
+        $menu = preg_replace('/facility_active/', 'facility_active active', $menu);
     }
     return $menu;
 }

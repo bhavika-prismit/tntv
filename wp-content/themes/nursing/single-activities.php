@@ -31,7 +31,9 @@ get_header(); ?>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                     <div class="insider-heading">
+                                     <?php if(get_post_thumbnail_id() != ""){?>
                                         <div class="insider-img"><?php echo get_the_post_thumbnail(get_the_ID(), "activities_page"); ?></div>
+                                        <?php }?>
 <!--                                        <div class="insider-img"><img src="--><?php //echo get_template_directory_uri()?><!--/assets/img/activities-img.jpg" alt="" class="img-responsive"></div>-->
                                         <h2 class="block-heading"><?php the_title(); ?></h2>
                                         <span class="date-stamp-normal"><?php echo get_the_date(); ?></span>

@@ -84,7 +84,9 @@
         </div>
     </div>
     <div class="copyright">
-        <div class="copyright-text"><?php echo isset($content['copyright']) ? $content['copyright'] : ""; ?></div>
+        <div class="copyright-text"><?php echo isset($content['copyright']) ? $content['copyright'] : ""; ?>
+        </div>
+        <div class="design">Website By: <a target="_blank" href="http://www.prismitsystems.com/"><img src="<?php echo get_template_directory_uri() . '/assets/img/prism_logo.gif';?>" alt="Prism IT Systems"></a></div>
     </div>
 </footer>
 <?php wp_footer(); ?>

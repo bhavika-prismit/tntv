@@ -96,8 +96,16 @@ get_header(); ?>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8 text-area">
                                                         <div class="text-block">
-                                                            <p><?php echo isset($content['description' . $i]) ?
-                                                                    stripslashes(trim($content['description' . $i])) : ""; ?></p>
+                                                            <p><?php $str = isset($content['description' . $i]) ?
+                                                                    stripslashes(trim($content['description' . $i])) : ""; 
+                                        
+                                            $length = strlen($str);
+                                            $str = substr($str, 0, 170);
+                                            if ($length > 170) {
+                                                $str .= "...";
+                                            }
+                                            echo $str;
+                                                                    ?></p>
                                                             <?php if (isset($content['read_more' . $i]) && $content['read_more' . $i] != "") { ?>
                                                                 <a class="readmore"
                                                                    href="<?php echo isset($content['read_more' . $i]) ? trim($content['read_more' . $i]) : ""; ?>">Read

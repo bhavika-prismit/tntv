@@ -236,6 +236,21 @@ $content = get_option('general_settings');
 					</div>
 				</div>
 			</div>
+            <div class="row">
+                <div class="col-sm-12 blocks">
+                    <div class="row">
+                        <h3>Activities Archive</h3>
+                           
+                                <div class="col-sm-9 form-group">
+                                <?php
+                                $activities_archive = isset($content['activities_archive']) ? stripcslashes(trim($content['activities_archive'])) : "";
+
+                                 wp_editor($activities_archive,'activities_archive');?>
+                                </div>
+                            
+                    </div>
+                </div>
+            </div>
         </div>
 		<div class="row">
         <div class="col-sm-12">
